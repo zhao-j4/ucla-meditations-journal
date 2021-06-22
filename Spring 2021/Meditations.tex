@@ -1,0 +1,144 @@
+\documentclass[10pt, twoside,openright]{book}
+\usepackage[10pt]{moresize}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[sc]{mathpazo}
+\usepackage[greek,english]{babel}
+\usepackage{csquotes}
+\usepackage{amsthm}
+
+\usepackage{graphicx}
+
+\usepackage{titletoc}
+\usepackage{titlesec}
+
+\usepackage{enumitem}
+
+\usepackage[paperheight=8.5in, paperwidth=5.5in, left = 0.5in, top = 2cm]{geometry}
+	
+%=======CHAPTER FORMATTING=========%
+\titleformat
+{\chapter} 
+[display]
+{\Large\bfseries} 
+{} 
+{\leftmargin}{}[]
+
+\titleformat*{\section}{\large\bfseries}
+
+\newcommand{\essayheader}[3]
+	{
+		\chapter{#1}				%the Title
+		\vspace{-1em}
+		
+		\begin{flushleft}
+			{\textsc{#2}}  \\
+			\textit{#3}
+		\end{flushleft}
+			%the Author
+		\vspace{1em}
+		\addcontentsline{toc}{section}{\textsc{#2}}
+		\addcontentsline{toc}{section}{\textit{#3}}
+	}
+	
+%=======TABLE OF CONTENTS FORMATTING=========%
+\titlecontents{chapter}% formatting-toc-chapters
+    [0em]% <left-indent>
+    {\vspace{2em}}% <above-code>
+    {\bfseries}% <numbered-entry-format>
+    {}% <numberless-entry-format>
+    {\hfill\contentspage}% <filler-page-format>
+    
+\titlecontents{section}% formatting-toc-section
+    [0em]% <left-indent>
+    {\vspace{2pt}}% <above-code>
+    {}% <numbered-entry-format>
+    {}% <numberless-entry-format>
+    {}% <filler-page-format>
+
+\setcounter{tocdepth}{1} %depth    
+
+%=======FOOTNOTE FORMATTING=========%
+\renewcommand{\thefootnote}{[\arabic{footnote}]}
+\setlength{\skip\footins}{1cm}
+\usepackage[]{footmisc}
+\renewcommand{\footnotemargin}{3mm} %Setting left margin
+\renewcommand{\footnotelayout}{\hspace{2mm}} %spacing between the footnote number and the text of footnote
+
+%symbols for footnotes in the optional argument, e.g. \footnote[$\dagger$]{text} will put a dagger for the footnote symbol
+\makeatletter
+\def\@xfootnote[#1]{%
+  \protected@xdef\@thefnmark{#1}%
+  \@footnotemark\@footnotetext}
+\makeatother
+
+\usepackage{fancyhdr}	% fancy headers
+\usepackage{emptypage}	% remove headers on blank pages
+\fancypagestyle{plain}
+{
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyhf{}%
+}
+ 
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+
+%Fix Section Numbering
+\renewcommand{\thesection}{\Roman{section}.}
+
+% Reduce hyphenation; this essentially increases the spacing after punctuation like periods and commas 
+
+\pretolerance=800
+\emergencystretch = 1em
+
+\begin{document}
+
+\frontmatter
+\pagenumbering{gobble}
+\input{titlepage}
+
+\titlespacing{\chapter}{0mm}{-2em}{2em}
+
+\cleardoublepage
+\input{credits}
+
+\chapter*{\huge Editor's Letter}
+\input{letter}
+
+\renewcommand{\contentsname}{\LARGE \hfill Table of Contents \hfill}
+
+\tableofcontents
+
+\mainmatter
+\pagenumbering{arabic}
+
+%Essay header is defined as Chapter (Title) Section (Author) Section (University) so that it appears in ToC
+\essayheader{Rational Transitions and Personal Identity}{Nicole Jingyi An}{New York University}
+\fancyhead[LO]{\scshape Rational Transitions and Personal Identity}
+\fancyhead[RE]{\scshape Nicole Jingyi An}
+
+\addtocontents{toc}{\setcounter{tocdepth}{0}}		%This is so that the sections of each paper do not appear in the ToC
+\input{nicole}
+\addtocontents{toc}{\setcounter{tocdepth}{1}}
+
+
+\essayheader{What is I and who has
+Real?: Language, Self and Identity in Lacan and Advaita Vedanta}{Diyaree Nath}{New York University}
+\fancyhead[LO]{\scshape What is I and who has
+Real?}
+\fancyhead[RE]{\scshape Diyaree Nath}
+
+\addtocontents{toc}{\setcounter{tocdepth}{0}}
+\input{nath}
+\addtocontents{toc}{\setcounter{tocdepth}{1}}
+
+\essayheader{Intentionality's Role in Bringing Art to Life}{Nathan Fish}{University of California, Los Angeles}
+\fancyhead[LO]{\scshape Intentionality's Role in Bringing Art to Life}
+\fancyhead[RE]{\scshape Nathan Fish}
+
+\addtocontents{toc}{\setcounter{tocdepth}{0}}
+\input{intentionality}
+\addtocontents{toc}{\setcounter{tocdepth}{1}}
+
+\end{document}
